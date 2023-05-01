@@ -1,2 +1,2 @@
 # hs-deck-compare
-A tool to compare two hearthstone decks
+The tool is in early development
