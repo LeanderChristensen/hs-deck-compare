@@ -1,0 +1,14 @@
+#main {
+  margin-left: auto;
+  margin-right: auto;
+  width: 500px;
+  /* background-color: red; */
+}
+
+#deckOne {
+  float: left;
+}
+
+#deckTwo {
+  float: right;
+}
