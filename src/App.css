@@ -5,10 +5,80 @@
   /* background-color: red; */
 }
 
+body {
+	font-family: 'Inter';
+}
+
+form {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+input {
+  width: 192px;
+}
+
+#deckOneInput {
+  margin-right: 100px;
+}
+
+#deckTwoInput {
+
+}
+
 #deckOne {
   float: left;
 }
 
 #deckTwo {
   float: right;
+}
+
+table, th {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+td {
+  border-top: 1px solid black;
+  padding: 10px;
+}
+
+.tableName {
+  text-align: center;
+  font-size: 13px;
+}
+
+.tableMana {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+  margin-top: 2px;
+  border-top: 0;
+}
+
+.tableMana img {
+  margin-bottom: 1px;
+  margin-right: 1px;
+  position: absolute;
+  width: 20px;
+  height: auto;
+  z-index: -1;
+}
+
+.numberBorder {
+  color: white;
+  text-shadow:
+  -1px -1px 0 #000,
+  1px -1px 0 #000,
+  -1px 1px 0 #000,
+  1px 1px 0 #000;  
+}
+
+.tableCount {
+  border-top: 0;
+  font-size: 12px;
 }

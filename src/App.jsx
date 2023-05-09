@@ -89,6 +89,10 @@ function App() {
 	}, []);
 	return (
 		<div id="main">
+			<form>
+				<input id="deckOneInput" name="deckOne" placeholder="Deck One" value="AAECAfHhBALLpQXMpQUOlrcE9eMEguQEk+QE2fEEsvcEtvcEtIAFk4EFkpMFoJkFopkFrqEFnqoFAA==" />
+				<input id="deckTwoInput" name="deckTwo" placeholder="Deck Two" value="AAECAfHhBASpgAW0gAXLpQXMpQUNlrcE9eMEguQEk+QEh/YEtvcEk4EFkpMFoJkFopkFrqEFnqoF+PkFAA==" />
+			</form>
 			<table id="deckOne">
 				<tbody>
 					{deckOneComparison.map((item, index) => (
@@ -103,9 +107,9 @@ function App() {
 									: "transparent",
 							}}
 						>
-							<td>{item.cost}</td>
-							<td>{item.name}</td>
-							<td>{item.count}</td>
+							<td className="tableMana"><span className="numberBorder">{item.cost}</span><img src="/mana_icon.webp"/></td>
+							<td className="tableName">{item.name}</td>
+							<td className="tableCount"><span className="numberBorder">{item.count}</span></td>
 						</tr>
 					))}
 				</tbody>
@@ -124,9 +128,9 @@ function App() {
 									: "transparent",
 							}}
 						>
-							<td>{item.cost}</td>
-							<td>{item.name}</td>
-							<td>{item.count}</td>
+							<td className="tableMana"><span className="numberBorder">{item.cost}</span><img src="/mana_icon.webp"/></td>
+							<td className="tableName">{item.name}</td>
+							<td className="tableCount"><span className="numberBorder">{item.count}</span></td>
 						</tr>
 					))}
 				</tbody>
