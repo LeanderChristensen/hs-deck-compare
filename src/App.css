@@ -7,6 +7,7 @@
 
 body {
 	font-family: 'Inter';
+  /* background-color: #E7D4A9; */
 }
 
 form {
@@ -81,4 +82,20 @@ td {
 .tableCount {
   border-top: 0;
   font-size: 12px;
+}
+
+.COMMON {
+  color: green;
+}
+
+.RARE {
+  color: #328ce3;
+}
+
+.EPIC {
+  color: #a02ef7;
+}
+
+.LEGENDARY {
+  color: #f07020;
 }

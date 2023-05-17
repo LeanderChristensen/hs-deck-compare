@@ -4,12 +4,13 @@ import { decode } from 'deckstrings';
 
 var cards;
 
+/*
 const deckOneString = decode(
 	'AAECAfHhBALLpQXMpQUOlrcE9eMEguQEk+QE2fEEsvcEtvcEtIAFk4EFkpMFoJkFopkFrqEFnqoFAA=='
 );
 const deckTwoString = decode(
 	'AAECAfHhBASpgAW0gAXLpQXMpQUNlrcE9eMEguQEk+QEh/YEtvcEk4EFkpMFoJkFopkFrqEFnqoF+PkFAA=='
-);
+);*/
 
 async function getCards() {
 	const options = {
@@ -55,6 +56,24 @@ function App() {
 	const [deckTwo, setDeckTwo] = useState([]);
 	const [deckOneComparison, setDeckOneComparison] = useState([]);
 	const [deckTwoComparison, setDeckTwoComparison] = useState([]);
+	const [formData, setFormData] = useState({formDeckOne: "", formDeckTwo: ""});
+	const [formSubmitted, setFormSubmitted] = useState(false);
+
+	const handleChange = (event) => {
+		setFormData({...formData, [event.target.name]: event.target.value});
+	};
+
+	const handleKeyDown = (event) => {
+		if (event.key === "Enter") {
+		  handleSubmit(event);
+		}
+	};
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		setFormSubmitted(true);
+		fetchDataAndInitialize(decode(document.getElementById("deckOneInput").value), decode(document.getElementById("deckTwoInput").value));
+	};
 
 	useEffect(() => {
 		if (deckOne.length > 0 && deckTwo.length > 0) {
@@ -62,37 +81,35 @@ function App() {
 			setDeckTwoComparison(compareDecks(deckTwo, deckOne));
 		}
 	}, [deckOne, deckTwo]);
-
-	useEffect(() => {
-		async function fetchDataAndInitialize() {
-			await getCards();
-			var deckOne = [];
-			var deckTwo = [];
-			for (let i = 0; i < deckOneString.cards.length; i++) {
-				let card = cards.find((c) => c.dbfId === deckOneString.cards[i][0]);
-				let newCard = { ...card, count: deckOneString.cards[i][1] };
-				deckOne.push(newCard);
-			}
-			for (let i = 0; i < deckTwoString.cards.length; i++) {
-				let card = cards.find((c) => c.dbfId === deckTwoString.cards[i][0]);
-				let newCard = { ...card, count: deckTwoString.cards[i][1] };
-				deckTwo.push(newCard);
-			}
-			//console.log(JSON.stringify(deckOne, null, 2));
-			deckOne.sort((a, b) => a.cost - b.cost);
-			deckTwo.sort((a, b) => a.cost - b.cost);
-			//const deckOneComparison = compareDecks(deckOne, deckTwo);
-			setDeckOne(deckOne);
-			setDeckTwo(deckTwo);
+	async function fetchDataAndInitialize(deckOneString, deckTwoString) {
+		await getCards();
+		var deckOne = [];
+		var deckTwo = [];
+		for (let i = 0; i < deckOneString.cards.length; i++) {
+			let card = cards.find((c) => c.dbfId === deckOneString.cards[i][0]);
+			let newCard = { ...card, count: deckOneString.cards[i][1] };
+			deckOne.push(newCard);
 		}
-		fetchDataAndInitialize();
-	}, []);
+		for (let i = 0; i < deckTwoString.cards.length; i++) {
+			let card = cards.find((c) => c.dbfId === deckTwoString.cards[i][0]);
+			let newCard = { ...card, count: deckTwoString.cards[i][1] };
+			deckTwo.push(newCard);
+		}
+		//console.log(JSON.stringify(deckOne, null, 2));
+		deckOne.sort((a, b) => a.cost - b.cost);
+		deckTwo.sort((a, b) => a.cost - b.cost);
+		//const deckOneComparison = compareDecks(deckOne, deckTwo);
+		setDeckOne(deckOne);
+		setDeckTwo(deckTwo);
+	}
 	return (
 		<div id="main">
-			<form>
-				<input id="deckOneInput" name="deckOne" placeholder="Deck One" value="AAECAfHhBALLpQXMpQUOlrcE9eMEguQEk+QE2fEEsvcEtvcEtIAFk4EFkpMFoJkFopkFrqEFnqoFAA==" />
-				<input id="deckTwoInput" name="deckTwo" placeholder="Deck Two" value="AAECAfHhBASpgAW0gAXLpQXMpQUNlrcE9eMEguQEk+QEh/YEtvcEk4EFkpMFoJkFopkFrqEFnqoF+PkFAA==" />
+			<form onSubmit={handleSubmit}>
+				<input id="deckOneInput" name="formDeckOne" placeholder="Deck One" value={formData.formDeckOne} onChange={handleChange} onKeyDown={handleKeyDown} />
+				<input id="deckTwoInput" name="formDeckTwo" placeholder="Deck Two" value={formData.formDeckTwo} onChange={handleChange} onKeyDown={handleKeyDown} />
 			</form>
+			{formSubmitted && (
+			<>
 			<table id="deckOne">
 				<tbody>
 					{deckOneComparison.map((item, index) => (
@@ -108,7 +125,7 @@ function App() {
 							}}
 						>
 							<td className="tableMana"><span className="numberBorder">{item.cost}</span><img src="/mana_icon.webp"/></td>
-							<td className="tableName">{item.name}</td>
+							<td className={`tableName ${item.rarity}`}>{item.name}</td>
 							<td className="tableCount"><span className="numberBorder">{item.count}</span></td>
 						</tr>
 					))}
@@ -129,12 +146,14 @@ function App() {
 							}}
 						>
 							<td className="tableMana"><span className="numberBorder">{item.cost}</span><img src="/mana_icon.webp"/></td>
-							<td className="tableName">{item.name}</td>
+							<td className={`tableName ${item.rarity}`}>{item.name}</td>
 							<td className="tableCount"><span className="numberBorder">{item.count}</span></td>
 						</tr>
 					))}
 				</tbody>
 			</table>
+			</>
+			)}
 		</div>
 	);
 }
