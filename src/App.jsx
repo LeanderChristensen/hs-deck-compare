@@ -4,14 +4,6 @@ import { decode } from 'deckstrings';
 
 var cards;
 
-/*
-const deckOneString = decode(
-	'AAECAfHhBALLpQXMpQUOlrcE9eMEguQEk+QE2fEEsvcEtvcEtIAFk4EFkpMFoJkFopkFrqEFnqoFAA=='
-);
-const deckTwoString = decode(
-	'AAECAfHhBASpgAW0gAXLpQXMpQUNlrcE9eMEguQEk+QEh/YEtvcEk4EFkpMFoJkFopkFrqEFnqoF+PkFAA=='
-);*/
-
 async function getCards() {
 	const options = {
 		hostname: 'api.hearthstonejson.com',
@@ -95,10 +87,8 @@ function App() {
 			let newCard = { ...card, count: deckTwoString.cards[i][1] };
 			deckTwo.push(newCard);
 		}
-		//console.log(JSON.stringify(deckOne, null, 2));
 		deckOne.sort((a, b) => a.cost - b.cost);
 		deckTwo.sort((a, b) => a.cost - b.cost);
-		//const deckOneComparison = compareDecks(deckOne, deckTwo);
 		setDeckOne(deckOne);
 		setDeckTwo(deckTwo);
 	}

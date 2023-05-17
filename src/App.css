@@ -2,12 +2,10 @@
   margin-left: auto;
   margin-right: auto;
   width: 500px;
-  /* background-color: red; */
 }
 
 body {
 	font-family: 'Inter';
-  /* background-color: #E7D4A9; */
 }
 
 form {
@@ -16,15 +14,11 @@ form {
 }
 
 input {
-  width: 192px;
+  width: 209px;
 }
 
 #deckOneInput {
-  margin-right: 100px;
-}
-
-#deckTwoInput {
-
+  margin-right: 63px;
 }
 
 #deckOne {
