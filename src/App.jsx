@@ -114,7 +114,8 @@ function App() {
 									: "transparent",
 							}}
 						>
-							<td className="tableMana"><span className="numberBorder">{item.cost}</span><img src="/mana_icon.webp"/></td>
+							<td 
+className="tableMana"><span className="numberBorder">{item.cost}</span><img src="./mana_icon.webp"/></td>
 							<td className={`tableName ${item.rarity}`}>{item.name}</td>
 							<td className="tableCount"><span className="numberBorder">{item.count}</span></td>
 						</tr>
@@ -135,7 +136,8 @@ function App() {
 									: "transparent",
 							}}
 						>
-							<td className="tableMana"><span className="numberBorder">{item.cost}</span><img src="/mana_icon.webp"/></td>
+							<td 
+className="tableMana"><span className="numberBorder">{item.cost}</span><img src="./mana_icon.webp"/></td>
 							<td className={`tableName ${item.rarity}`}>{item.name}</td>
 							<td className="tableCount"><span className="numberBorder">{item.count}</span></td>
 						</tr>
