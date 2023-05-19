@@ -6,7 +6,7 @@ The application is built with React and JavaScript, and uses the npm package "de
 
 ## Live Application
 
-The application can be accessed at [leander.cx/hsdeckcompare](https://leander.cx/hsdeckcompare/)
+The application can be accessed at [l-c.io/hsdeckcompare](https://l-c.io/hsdeckcompare/)
 
 ## Installation
 
